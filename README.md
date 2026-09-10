@@ -81,6 +81,6 @@ PORQUE ELABOREI ESSE PROJETO
 ## 📝 Licença
 
 Este projeto está sob a licença [MIT](LICENSE).
-[LinkedIn:](https://www.linkedin.com/in/dieldev/)
-[Email:](gidieldev@gmail.com)
+[LinkedIn:] (https://www.linkedin.com/in/dieldev/)
+[Email:] (gidieldev@gmail.com)
 
