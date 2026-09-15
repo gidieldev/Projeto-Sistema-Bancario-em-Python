@@ -52,34 +52,36 @@ while True:
         #foi criado condições para realizar o saque
 
         while True:
-            if numero_saques < LIMITE_SAQUES:          
-                if saldo == 0:
-                    print('Sem saldo disponível.')
-
+            if numero_saques < LIMITE_SAQUES and saldo > 0:
                 valor = float(input('Informe o valor que deseja sacar: '))
-                while valor <= 0:
-                    valor = float(input('Informe um valor válido:'))
 
-                if valor <= saldo:
-                    if valor <= 500:     
-                        saldo -= valor 
-                        #a lista de saques recebe o valor sacado
-                        Saques.append(valor)
-                        print(f'O Saque de R$ {valor:.2f} foi efetuado com sucesso.')
+                #verificando se o valor digitado é inválido
+                while valor <= 0 or valor > saldo or valor > 500:
+                    if valor > 500:
+                        print(f'O valor é maior do que o limite de R$ 500 por saque.')
+                    valor = float(input('Informe um valor válido:'))    
 
-                    else:
-                        print('O valor informado é maior do que o limite diário de R$ 500 reais.')
-
+            #sendo válido, pode sacar
+                saldo -= valor 
+            #a lista de saques recebe o valor sacado
+                Saques.append(valor)
+                print(f'O Saque de R$ {valor:.2f} foi efetuado com sucesso.')
                 numero_saques += 1
 
-                #Laço para continuar sacando dinheiro
                 Continuar_Saque = str(input('Deseja sacar novamente?: [S/N] ')).upper().strip()
                 if Continuar_Saque in ["N", "NÃO", "NAO"]:
                     break
+
+            #CASO CONTRARIO, (EXTRAPOLOU A QUANTIDADE DE SAQUE DIARIO OU NAO TIVER SALDO)
+            #PRECISAMOS EXIBIR UMA MENSAGEM INFORMANDO ISSO DE ACORDO COM O QUE ACONTECEU
             else:
-                print('LIMITE DE SAQUE DIÁRIOS: 3.\nVocê já utilizou o limite diário disponível.')
-                break   
-        
+                if saldo <= 0:
+                    print('Você não possui saldo disponível')
+                    break
+                if numero_saques >= LIMITE_SAQUES:
+                    print('O número diário de 3 saques foi atingido.')
+                    break
+
     if opcao == 3:
 
         #Passando os dados da lista Depositos e Saques para dentro do Dicionário Extrato 
